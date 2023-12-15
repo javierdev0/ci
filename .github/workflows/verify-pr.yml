@@ -20,11 +20,21 @@ jobs:
         with:
           node-version: 16
 
+      - name: Cache node modules
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.npm
+            ~/.cache
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/*.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
+
       - name: Install dependencies
         run: npm install
 
       - name: Check code formatting
         run: npm run lint
-        
+
       - name: Build
         run: npm run build
