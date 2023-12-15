@@ -1,0 +1,23 @@
+name: Check files protected
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  check-protected-file:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Check if protected file is modified
+        run: |
+          protected_file="ruta/a/tu/archivo"
+
+          if git diff --name-only ${{ github.sha }}^ ${{ github.sha }} | grep -q "^$protected_file$"; then
+            echo "El archivo protegido ha sido modificado directamente. Abortando el flujo de trabajo."
+            exit 1
+          fi
