@@ -1,0 +1,30 @@
+name: Main workflow
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - name: Set up node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+
+      - name: Run Install Dependencies Workflow
+        run: .github/workflows/install-dependencies.yml
+
+      - name: Run lint
+        run: .github/workflows/run-lint.yml
+
+      - name: Run build
+        run: .github/workflows/run-build.yml
