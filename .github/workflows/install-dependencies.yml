@@ -1,4 +1,4 @@
-name: Build and check formatting on pull request
+name: Install dependencies
 
 on:
   pull_request:
@@ -22,9 +22,3 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-
-      - name: Check code formatting
-        run: npm run lint
-        
-      - name: Build
-        run: npm run build

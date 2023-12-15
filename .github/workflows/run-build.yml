@@ -1,0 +1,14 @@
+name: Run build
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Run build
+        run: npm run build
