@@ -1,4 +1,4 @@
-name: Install dependencies
+name: Build and check formatting on pull request
 
 on:
   pull_request:
@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  install-dependencies:
+  build-and-check:
     runs-on: ubuntu-latest
 
     steps:
@@ -22,3 +22,9 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+
+      - name: Check code formatting
+        run: npm run lint
+        
+      - name: Build
+        run: npm run build
